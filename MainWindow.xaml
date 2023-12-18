@@ -5,9 +5,73 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mvvm"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow"
+        Height="400"
+        Background="LightCoral"
+        Width="450"
+        FontFamily="Rubik">
     <Grid>
-        <Button Width="250" Height="25" Content="Close this window!"
-                Click="OnCloseThisWindow_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <ListBox Grid.Column="0" 
+                 ItemsSource="{Binding Cars}"
+                 SelectedItem="{Binding SelectedCar}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="18" 
+                                   Text="{Binding Path=Name,
+                                   StringFormat='Name: {0}'}"/>
+                        <TextBlock Text="{Binding Path=EnginePower,
+                                   StringFormat='engine: {0}'}"/>
+                        <TextBlock Text="{Binding Path=HorsePower,
+                                   StringFormat='hp: {0}'}" />
+                        <TextBlock Text="{Binding Path=Price,
+                                   StringFormat='Price: ${0}'}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="1" DataContext="{Binding SelectedCar}">
+            <TextBlock Text="Car name:"
+                       Foreground="DarkRed"
+                       Margin="5"
+                       FontSize="16" />
+            <TextBox Margin="5" 
+                     Height="20"
+                     Text="{Binding Name, 
+                     UpdateSourceTrigger=PropertyChanged}"
+                     FontSize="14" />
+            <TextBlock Text="Engine Power:"
+                       Foreground="DarkRed"
+                       Margin="5"
+                       FontSize="16" />
+            <TextBox Margin="5"
+                     Height="20"
+                     Text="{Binding EnginePower, 
+                     UpdateSourceTrigger=PropertyChanged}"
+                     FontSize="14" />
+            <TextBlock Text="Horse Power:"
+                       Foreground="DarkRed"
+                       Margin="5"
+                       FontSize="16" />
+            <TextBox Margin="5"
+                     Height="20"
+                     Text="{Binding HorsePower, 
+                     UpdateSourceTrigger=PropertyChanged}"
+                     FontSize="14" />
+            <TextBlock Text="Price:"
+                       Foreground="DarkRed"
+                       Margin="5"
+                       FontSize="16"/>
+            <TextBox Margin="5"
+                     Height="20"
+                     Text="{Binding Price, 
+                     UpdateSourceTrigger=PropertyChanged}"
+                     FontSize="14" />
+        </StackPanel>
     </Grid>
 </Window>
